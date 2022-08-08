@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CottageImage extends Model
 {
     use HasFactory;
+    protected $casts = [
+        'tags' => 'json',
+    ];
 }

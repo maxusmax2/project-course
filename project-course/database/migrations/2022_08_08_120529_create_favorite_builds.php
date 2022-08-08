@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('build_id');
             $table->string('build_type');
             $table->timestamps();
+            $table->fullText('user_token','build_id');
         });
     }
 

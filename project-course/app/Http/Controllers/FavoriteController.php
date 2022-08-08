@@ -9,6 +9,7 @@ use App\Models\Commercial;
 use App\Models\Cottage;
 use App\Models\Land;
 use App\Models\Room;
+use Illuminate\Support\Facades\Log;
 
 class FavoriteController extends Controller
 {
@@ -80,7 +81,7 @@ class FavoriteController extends Controller
         $build->user_token =  $request->user()->token()->id;
 
         $build->save();
-        echo $build;
+
     }
 
     public function deleteFavorite(Request $request,$buildType,$id){
