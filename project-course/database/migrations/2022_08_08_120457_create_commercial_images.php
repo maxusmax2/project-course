@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('image_name');
 
             $table->timestamps();
-            $table->foreign('build_id')->references('id')->on('commercials')->onDelete('cascade');
+            $table->foreign('build_id')->references('id')->on('commercial')->onDelete('cascade');
         });
     }
 

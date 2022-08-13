@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('commercials', function (Blueprint $table) {
+        Schema::create('commercial', function (Blueprint $table) {
             $table->id();
             $table->string('phone_number');
             $table->longText('description');
@@ -47,6 +47,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('commercials');
+        Schema::dropIfExists('commercial');
     }
 };
