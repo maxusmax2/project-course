@@ -28,7 +28,7 @@ class FavoriteController extends Controller
 
             $buildObject = DB::table($build->build_type)->find($build->build_id);
             $buildImages = $this->getImageBuild(DB::table($build->build_type),$build->build_type);
-            $Response[] = $this->packFavoriteBuild($buildObject,$buildImages);
+            $Response[] = $this->buildResponse($buildObject,$buildImages);
         }
 
         return $Response;
