@@ -25,7 +25,7 @@ class CompareController extends Controller
         foreach($builds as $build){
 
             $buildObject = DB::table($build->build_type)->find($build->build_id);
-            $buildImages = $this->getImageBuild(DB::table($build->build_type),$build->build_type);
+            $buildImages = $this->getImageBuild(DB::table($build->build_type),$build->build_type,$build->build_id);
             $Response[] = $this->buildResponse($buildObject,$buildImages);
         }
 

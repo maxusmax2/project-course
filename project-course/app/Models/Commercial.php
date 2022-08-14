@@ -11,7 +11,7 @@ class Commercial extends Model
     /**
      * Get all image for this build
      */
-
+    protected $table = 'commercial';
     public function images()
     {
         return $this->hasMany(CommercialImage::class);

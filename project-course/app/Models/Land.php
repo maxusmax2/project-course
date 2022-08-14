@@ -12,7 +12,7 @@ class Land extends Model
     /**
      * Get all image for this build
      */
-
+    protected $table = 'land';
     public function images()
     {
         return $this->hasMany(LandImage::class);

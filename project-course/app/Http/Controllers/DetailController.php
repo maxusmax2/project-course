@@ -29,7 +29,7 @@ class DetailController extends Controller
         }
 
         $buildObject = DB::table($buildType)->find($id);
-        $imageResponse = $this->getImageBuild(DB::table($buildType),$buildType);
+        $imageResponse = $this->getImageBuild(DB::table($buildType),$buildType,$id);
         $response = $this->buildResponse($buildObject,$imageResponse);
 
         Cache::tags($buildType)->put($id,$response,$this->cacheTime);

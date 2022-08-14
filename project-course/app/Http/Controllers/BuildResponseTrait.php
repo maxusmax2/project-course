@@ -11,11 +11,13 @@ trait BuildResponseTrait
         return ['buildInfo'=>$buildInfo,'images'=>$buildImages];
     }
 
-    private function getImageBuild($buildObject,$buildType):array
+    private function getImageBuild($buildObject,$buildType,$id):array
     {
         $buildImages = $buildObject
-            ->join("{$buildType}_images","{$buildType}.id",'=',"{$buildType}_images.build_id")
-            ->select("{$buildType}_images.image_name")
+            ->join("images","images.build_id",'=',$buildType.".id")
+            ->where("images.build_id",'=',$id)
+            ->where("images.build_type",'=',$buildType)
+            ->select("images.image_name")
             ->get();
 
         $imageResponse = [];
