@@ -24,8 +24,7 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(FavoriteRepository::class, function () {
-            // Это полезно, если мы хотим выключить наш кластер
-            // или при развертывании поиска на продакшене
+
             if (! config('services.search.enabled')) {
                 return new EloquentRepository();
             }
