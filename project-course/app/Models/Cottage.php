@@ -12,7 +12,6 @@ class Cottage extends Model
     /**
      * Get all image for this build
      */
-
     public function images()
     {
         return $this->hasMany(CottageImage::class);

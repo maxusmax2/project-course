@@ -9,10 +9,12 @@ class Land extends Model
 {
     use HasFactory;
 
+    protected $table = 'land';
+
     /**
      * Get all image for this build
      */
-    protected $table = 'land';
+
     public function images()
     {
         return $this->hasMany(LandImage::class);

@@ -27,7 +27,6 @@ class MailSendJob implements ShouldQueue
     public function __construct(User $user)
     {
         $this->user = $user;
-
     }
 
     /**
@@ -37,7 +36,7 @@ class MailSendJob implements ShouldQueue
      */
     public function handle()
     {
-        Log::info($this->user->email);
+        //Отправка на почту сообщения о регистрации на сайте
         Mail::to($this->user->email)->send(new UserRegistered());
     }
 }

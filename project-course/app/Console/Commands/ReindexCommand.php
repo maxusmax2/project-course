@@ -45,20 +45,14 @@ class ReindexCommand extends Command
      */
     public function handle()
     {
-        $this->info('Indexing all articles. This might take a while...');
-
-        foreach (FavoriteBuild::cursor() as $article)
+        foreach (FavoriteBuild::cursor() as $build)
         {
             $this->elasticsearch->index([
-                'index' => $article->getSearchIndex(),
-                'type' => $article->getSearchType(),
-                'id' => $article->getKey(),
-                'body' => $article->toSearchArray(),
+                'index' => $build->getSearchIndex(),
+                'type' => $build->getSearchType(),
+                'id' => $build->getKey(),
+                'body' => $build->toSearchArray(),
             ]);
-
-            $this->output->write('.');
         }
-
-        $this->info('\nDone!');
     }
 }

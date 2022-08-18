@@ -28,12 +28,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        //Заполнение всех таблиц объектов и их фото
         Cottage::factory()->count(200)->create();
         Commercial::factory()->count(200)->create();
         Land::factory()->count(200)->create();

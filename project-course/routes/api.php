@@ -17,16 +17,26 @@ use Illuminate\Support\Facades\Auth;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+//роут выдающий деталку товара
 Route::get('/catalog/sale-{buildType}/{id}',[DetailController::class,'getDetail']);
 
+/*
+    группа роутов связнная с избранным и сравнением (добавление,удаление,просмотр).
+    Объеденил,потому что для них нужна аутентификация (посредних auth:api)
+*/
 Route::middleware('auth:api')->group(function(){
 
+    //Добавление и удаление  объектов из избранного
     Route::post('/catalog/sale-{buildType}/{id}/append-favorite',[FavoriteController::class,'appendFavorite']);
     Route::post('/catalog/sale-{buildType}/{id}/delete-favorite',[FavoriteController::class,'deleteFavorite']);
+
+    //Выдача объектов из избранного для определенного пользователя
     Route::get('/favorite',[FavoriteController::class,'getFavorite']);
 
+    //Добавление и удаление  объектов из сравнения
     Route::post('/catalog/sale-{buildType}/{id}/append-compare',[CompareController::class,'appendCompare']);
     Route::post('/catalog/sale-{buildType}/{id}/delete-compare',[CompareController::class,'deleteCompare']);
+
+    //Выдача объектов из сравнения для определенного пользователя
     Route::get('/compare',[CompareController::class,'getCompare']);
 });

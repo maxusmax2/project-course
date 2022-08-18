@@ -17,9 +17,4 @@ class Apartment extends Model
     {
         return $this->hasMany(ApartmentImage::class);
     }
-
-    protected static function newFactory()
-    {
-        return ApartmentFactory::new();
-    }
 }

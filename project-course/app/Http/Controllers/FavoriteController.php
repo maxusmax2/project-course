@@ -16,25 +16,28 @@ use Illuminate\Support\Facades\Storage;
 class FavoriteController extends Controller
 {
     use BuildResponseTrait;
-    public function getFavorite(Request $request){
-
+    //Получение объектов для Избранного
+    public function getFavorite(Request $request)
+    {
         $Response = [];
-
+        // Получение объектов для определенного пользователя по его токену пользователя
         $builds = FavoriteBuild::
             where('user_token',$request->user()->token()->id)
             ->get();
 
+        //Сборка всех объектов и их фото вместе
         foreach($builds as $build){
 
             $buildObject = DB::table($build->build_type)->find($build->build_id);
-            $buildImages = $this->getImageBuild(DB::table($build->build_type),$build->build_type,1);
+            $buildImages = $this->getImageBuild(DB::table($build->build_type),$build->build_type,$build->build_id);
             $Response[] = $this->buildResponse($buildObject,$buildImages);
         }
 
         return $Response;
     }
-
-    public function appendFavorite(Request $request,$buildType,$id){
+    //Добавление в избранное
+    public function appendFavorite(Request $request, string $buildType, int $id)
+    {
         $build = new FavoriteBuild;
 
         $build->build_type = $buildType;
@@ -42,16 +45,16 @@ class FavoriteController extends Controller
         $build->user_token =  $request->user()->token()->id;
 
         $build->save();
-
     }
 
-    public function deleteFavorite(Request $request,$buildType,$id){
+    //Удаления из избранного
+    public function deleteFavorite(Request $request,string $buildType, int $id)
+    {
         FavoriteBuild::
             where('build_type',$buildType)
             ->where('build_id',$id)
             ->where('user_token',$request->user()->token()->id)
             ->delete();
     }
-
 
 }

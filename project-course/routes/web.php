@@ -12,13 +12,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Начальная страница оставлена для тестирования регистрации пользователей
 Route::get('/', function () {
     return view('welcome');
 });
-
+//route выдаваемый после аутентификации пользователя
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+//Загружаем все роуты нужные для аутентификации
 require __DIR__.'/auth.php';

@@ -3,25 +3,21 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\CompareBuild;
-use App\Models\Apartment;
-use App\Models\Commercial;
-use App\Models\Cottage;
-use App\Models\Land;
-use App\Models\Room;
 use Illuminate\Support\Facades\DB;
 
 class CompareController extends Controller
 {
     use BuildResponseTrait;
-
-    public function getCompare(Request $request){
-
+    //Получение объектов для сравнения
+    public function getCompare(Request $request):array
+    {
         $Response = [];
-
+        // Получение объектов для определенного пользователя по его токену пользователя
         $builds = CompareBuild::
             where('user_token',$request->user()->token()->id)
             ->get();
 
+        //Сборка всех объектов и их фото вместе
         foreach($builds as $build){
 
             $buildObject = DB::table($build->build_type)->find($build->build_id);
@@ -31,8 +27,9 @@ class CompareController extends Controller
 
         return $Response;
     }
-
-    public function appendCompare(Request $request,$buildType,$id){
+    //Добавление в сравнения
+    public function appendCompare(Request $request, string  $buildType, int $id)
+    {
         $build = new CompareBuild;
 
         $build->build_type = $buildType;
@@ -41,8 +38,9 @@ class CompareController extends Controller
 
         $build->save();
     }
-
-    public function deleteCompare(Request $request,$buildType,$id){
+    //Удаление из сравнения
+    public function deleteCompare(Request $request, string $buildType, int $id)
+    {
         CompareBuild::
             where('build_type',$buildType)
             ->where('build_id',$id)
